@@ -24,8 +24,9 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 
 SOURCES += main.cpp\
-        mainwindow.cpp
+    raspui.cpp
 
-HEADERS  += mainwindow.h
+HEADERS  += \
+    raspui.h
 
 FORMS    += mainwindow.ui
