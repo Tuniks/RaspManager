@@ -16,6 +16,9 @@ public:
 
 private slots:
     void on_Execute_clicked();
+    void on_Back_clicked();
+public slots:
+    void textChangedSlot();
 
 private:
     Ui::MainWindow *ui;
