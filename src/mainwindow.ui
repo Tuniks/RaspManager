@@ -37,13 +37,13 @@
      </rect>
     </property>
    </widget>
-   <widget class="QPlainTextEdit" name="Log">
+   <widget class="QPlainTextEdit" name="logg">
     <property name="geometry">
      <rect>
       <x>20</x>
-      <y>50</y>
+      <y>230</y>
       <width>511</width>
-      <height>201</height>
+      <height>21</height>
      </rect>
     </property>
     <property name="readOnly">
@@ -61,6 +61,16 @@
     </property>
     <property name="text">
      <string>Back</string>
+    </property>
+   </widget>
+   <widget class="QListWidget" name="Log">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>50</y>
+      <width>511</width>
+      <height>161</height>
+     </rect>
     </property>
    </widget>
   </widget>

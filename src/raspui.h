@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QListWidget>
 
 namespace Ui {
     class MainWindow;
@@ -17,8 +18,13 @@ public:
 private slots:
     void on_Execute_clicked();
     void on_Back_clicked();
+    void showContextMenu(const QPoint&);
+    void eraseItem();
+    void onItemDoubleClicked(QListWidgetItem*);
+
 public slots:
     void textChangedSlot();
+
 
 private:
     Ui::MainWindow *ui;
