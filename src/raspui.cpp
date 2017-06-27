@@ -2,6 +2,7 @@
 #include <QDir>
 #include <QDirIterator>
 #include <QMessageBox>
+#include <QInputDialog>
 #include "raspui.h"
 #include "ui_mainwindow.h"
 
@@ -52,7 +53,7 @@ void MainWindow::on_Back_clicked(){
      QPoint globalPos = ui->Log-> mapToGlobal(pos);
      QMenu dropMenu;
      dropMenu.addAction("Delete", this, SLOT(eraseItem()));
-     //dropMenu.addAction("Create", this, SLOT(createItem()));
+     dropMenu.addAction("Create", this, SLOT(createItem()));
      dropMenu.exec(globalPos);
  }
 
@@ -67,6 +68,19 @@ void MainWindow::on_Back_clicked(){
             delete item;
          }
      }
+ }
+
+ void MainWindow::createItem(){
+    bool ok;
+    QMessageBox::StandardButton info;
+    QString dirName = QInputDialog::getText(this, "RASP", "Directory Name:", QLineEdit::Normal, "", &ok);
+    if(ok && !dirName.isEmpty()){
+        if(currentDir.mkdir(dirName)){
+            info = QMessageBox::information(this, "RASP", "Directory successfully created.");
+        }
+        else
+            info = QMessageBox::information(this, "RASP", "Directory could not be created.");
+    }
  }
 
  void MainWindow::onItemDoubleClicked(QListWidgetItem *item){
