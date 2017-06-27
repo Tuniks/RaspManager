@@ -13,6 +13,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    ui->stackedWidget->setCurrentIndex(0);
     ui->Path->setText(currentDir.absolutePath());
     ui->Log->setSelectionMode(QAbstractItemView::ExtendedSelection);
     connect(ui->Path,SIGNAL(editingFinished()),this,SLOT(textChangedSlot()));
@@ -88,3 +89,10 @@ void MainWindow::on_Back_clicked(){
      on_Execute_clicked();
      ui->Path->setText(currentDir.absolutePath());
  }
+
+void MainWindow::on_workspaceList_itemDoubleClicked(QListWidgetItem *item){
+    if(item->text() == "Local")
+        ui->stackedWidget->setCurrentIndex(0);
+    else if(item->text() == "Server 1")
+        ui->stackedWidget->setCurrentIndex(1);
+}

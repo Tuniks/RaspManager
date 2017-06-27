@@ -22,6 +22,7 @@ private slots:
     void eraseItem();
     void createItem();
     void onItemDoubleClicked(QListWidgetItem*);
+    void on_workspaceList_itemDoubleClicked(QListWidgetItem *item);
 
 public slots:
     void textChangedSlot();
