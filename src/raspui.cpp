@@ -3,6 +3,9 @@
 #include <QDirIterator>
 #include <QMessageBox>
 #include <QInputDialog>
+#include <QFileInfo>
+#include <QDesktopServices>
+#include <QUrl>
 #include "raspui.h"
 #include "ui_mainwindow.h"
 
@@ -85,9 +88,16 @@ void MainWindow::on_Back_clicked(){
  }
 
  void MainWindow::onItemDoubleClicked(QListWidgetItem *item){
-     currentDir.cd(item->text());
-     on_Execute_clicked();
-     ui->Path->setText(currentDir.absolutePath());
+     QFileInfo infoFile(item->text());
+
+     if(infoFile.isDir()){
+        currentDir.cd(item->text());
+        on_Execute_clicked();
+        ui->Path->setText(currentDir.absolutePath());
+     }
+     else{
+        QDesktopServices::openUrl(QUrl::fromLocalFile(item->text()));
+     }
  }
 
 void MainWindow::on_workspaceList_itemDoubleClicked(QListWidgetItem *item){
