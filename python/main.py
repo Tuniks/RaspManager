@@ -91,6 +91,10 @@ class Ui(QtWidgets.QMainWindow):
         self.connected = True
         self.stackedWidget.setCurrentIndex(1)
 
+    def on_disconnect_clicked(self):
+        self.connect = False
+        #CLOSE FTP
+        self.stackedWidget.setCurrentIndex(2)
 
 if __name__ == '__main__':
     app = QtWidgets.QApplication(sys.argv)
