@@ -59,6 +59,9 @@
         <height>481</height>
        </rect>
       </property>
+      <property name="contextMenuPolicy">
+       <enum>Qt::CustomContextMenu</enum>
+      </property>
       <property name="alternatingRowColors">
        <bool>true</bool>
       </property>
@@ -175,5 +178,76 @@
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>Execute</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>on_execute_clicked()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>900</x>
+     <y>74</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>967</x>
+     <y>50</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>Path</sender>
+   <signal>editingFinished()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>on_path_change()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>811</x>
+     <y>72</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>776</x>
+     <y>40</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>Back</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>on_back_clicked()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>472</x>
+     <y>70</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>418</x>
+     <y>51</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>Log</sender>
+   <signal>customContextMenuRequested(QPoint)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>show_context_menu()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>695</x>
+     <y>333</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>499</x>
+     <y>308</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>on_execute_clicked()</slot>
+  <slot>on_path_change()</slot>
+  <slot>on_back_clicked()</slot>
+  <slot>show_context_menu()</slot>
+ </slots>
 </ui>
