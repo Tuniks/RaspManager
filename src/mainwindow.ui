@@ -162,7 +162,7 @@
      <x>0</x>
      <y>0</y>
      <width>1000</width>
-     <height>21</height>
+     <height>22</height>
     </rect>
    </property>
   </widget>
@@ -243,11 +243,45 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>Log</sender>
+   <signal>itemDoubleClicked(QListWidgetItem*)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>on_item_double_clicked(QListWidgetItem*)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>486</x>
+     <y>175</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>381</x>
+     <y>210</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>workspaceList</sender>
+   <signal>itemDoubleClicked(QListWidgetItem*)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>on_workspace_item_double_clicked(QListWidgetItem*)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>97</x>
+     <y>125</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>341</x>
+     <y>96</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>on_execute_clicked()</slot>
   <slot>on_path_change()</slot>
   <slot>on_back_clicked()</slot>
   <slot>show_context_menu()</slot>
+  <slot>on_item_double_clicked(QListWidgetItem*)</slot>
+  <slot>on_workspace_item_double_clicked(QListWidgetItem*)</slot>
  </slots>
 </ui>
