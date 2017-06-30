@@ -39,7 +39,7 @@ class FtpConnection(FTP):
         except ftplib.error_perm:
             return
 
-    def uploadMulti(file):
+    def uploadMulti(self, file):
         ftp = FtpConnection()
         ftp.connect("iuricostermani.tk")
         ftp.login("meeseeks","lookatme")
@@ -48,6 +48,6 @@ class FtpConnection(FTP):
         f.close()
         ftp.quit()
 
-    def uploadPool(files):
+    def uploadPool(self, files):
         pool = ThreadPool(len(files))
         pool.map(uploadMulti, files)

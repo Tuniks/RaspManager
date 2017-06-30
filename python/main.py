@@ -158,6 +158,7 @@ class Ui(QtWidgets.QMainWindow):
         items = self.Log.selectedItems()
         for item in items:
             itemNames.append(item.text())
+        
         if len(itemNames) == 1:
             for item in items:
                 self.ftp.upload(item.getText())
