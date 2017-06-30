@@ -442,6 +442,22 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>workspaceList</sender>
+   <signal>itemDoubleClicked(QListWidgetItem*)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>on_workspace_item_double_clicked(QListWidgetItem*)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>94</x>
+     <y>132</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>342</x>
+     <y>141</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>on_execute_clicked()</slot>

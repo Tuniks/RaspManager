@@ -118,7 +118,7 @@ class Ui(QtWidgets.QMainWindow):
         for item in self.ftp.objList:
             self.Log_2.addItem(item['name'])
 
-    def on_remote_back_clicked(self):
+    def on_remote_back_double_clicked(self):
         self.ftp.cd("..")
         self.load_remote_log()
 
@@ -150,13 +150,19 @@ class Ui(QtWidgets.QMainWindow):
         #DOWNLOAD FILE
 
     def upload_item(self):
+        itemNames = []
         if not self.connected:
             QMessageBox.information(self, "RASP", "Connect to server before uploading.")
             return
 
         items = self.Log.selectedItems()
         for item in items:
-            self.ftp.upload(item.getText())
+            itemNames.append(item.text())
+        if len(itemNames) == 1:
+            for item in items:
+                self.ftp.upload(item.getText())
+        else:
+            self.ftp.uploadPool(itemNames)
 
 if __name__ == '__main__':
     app = QtWidgets.QApplication(sys.argv)

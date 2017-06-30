@@ -1,6 +1,6 @@
 from ftplib import FTP
 import ftplib
-
+from multiprocessing.pool import ThreadPool
 
 class FtpConnection(FTP):
 
@@ -38,3 +38,16 @@ class FtpConnection(FTP):
             self.delete(filename)
         except ftplib.error_perm:
             return
+
+    def uploadMulti(file):
+        ftp = FtpConnection()
+        ftp.connect("iuricostermani.tk")
+        ftp.login("meeseeks","lookatme")
+        f = open(file,'rb')
+        ftp.storbinary('STOR %s' %file, f)
+        f.close()
+        ftp.quit()
+
+    def uploadPool(files):
+        pool = ThreadPool(len(files))
+        pool.map(uploadMulti, files)
