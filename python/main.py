@@ -161,7 +161,7 @@ class Ui(QtWidgets.QMainWindow):
         
         if len(itemNames) == 1:
             for item in items:
-                self.ftp.upload(item.getText())
+                self.ftp.upload(item.text())
         else:
             self.ftp.uploadPool(itemNames)
 

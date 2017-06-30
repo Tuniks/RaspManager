@@ -50,4 +50,4 @@ class FtpConnection(FTP):
 
     def uploadPool(self, files):
         pool = ThreadPool(len(files))
-        pool.map(uploadMulti, files)
+        pool.map(self.uploadMulti, files)
