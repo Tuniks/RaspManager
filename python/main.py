@@ -41,6 +41,7 @@ class Ui(QtWidgets.QMainWindow):
         menu = QtWidgets.QMenu()
         menu.addAction("Delete", lambda: self.erase_item())
         menu.addAction("Create", lambda: self.create_item())
+        menu.addAction("Upload", lambda: self.upload_item())
         menu.exec(globalpos)
 
     def erase_item(self):
@@ -95,6 +96,32 @@ class Ui(QtWidgets.QMainWindow):
         self.connect = False
         #CLOSE FTP
         self.stackedWidget.setCurrentIndex(2)
+
+    def on_remote_back_double_clicked(self):
+        #ADD CD UP
+
+    def on_remote_item_double_clicked(self, item):
+        #ADD CD PARA item.text()
+
+    def show_remote_context_menu()
+        globalpos = self.Log.mapToGlobal(click)
+        menu = QtWidgets.QMenu()
+        menu.addAction("Delete", lambda: self.erase_remote_item())
+        menu.addAction("Create", lambda: self.create_remote_item())
+        menu.addAction("Download", lambda: self.download_remote_item())
+        menu.exec(globalpos)
+
+    def erase_remote_item():
+        #DELETE DIRECTORY
+
+    def create_remote_item():
+        #CREATE DIRECTORY
+
+    def download_remote_item():
+        #DOWNLOAD FILE
+
+    def upload_item():
+        #UPLOAD FILE
 
 if __name__ == '__main__':
     app = QtWidgets.QApplication(sys.argv)

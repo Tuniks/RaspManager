@@ -26,8 +26,6 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->Log, SIGNAL(customContextMenuRequested(QPoint)),this,SLOT(showContextMenu(QPoint)));
 
     connect(ui->Log, SIGNAL(itemDoubleClicked(QListWidgetItem*)), this, SLOT(onItemDoubleClicked(QListWidgetItem*)));
-
-
 }
 
 MainWindow::~MainWindow(){
