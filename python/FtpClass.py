@@ -20,10 +20,6 @@ class FtpConnection(FTP):
 
     def cd(self, dirName):
         try:
-            # for obj in self.objList:
-            #     if obj['name'] == dirName and obj['isDir']:
-            #         return
-
             self.cwd(dirName)
             self.ls()
         except ftplib.error_perm:

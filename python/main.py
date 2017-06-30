@@ -84,6 +84,7 @@ class Ui(QtWidgets.QMainWindow):
         if item.text() == "Local":
             self.stackedWidget.setCurrentIndex(0)
         elif item.text() == "Server" and self.connected:
+            self.load_remote_log()
             self.stackedWidget.setCurrentIndex(1)
         elif item.text() == "Server" and not self.connected:
             self.stackedWidget.setCurrentIndex(2)
@@ -124,7 +125,6 @@ class Ui(QtWidgets.QMainWindow):
     def on_remote_item_double_clicked(self, item):
         self.ftp.cd(item.text())
         self.load_remote_log()
-        return
 
     def show_remote_context_menu(self, click):
         globalpos = self.Log.mapToGlobal(click)
@@ -135,8 +135,11 @@ class Ui(QtWidgets.QMainWindow):
         menu.exec(globalpos)
 
     def erase_remote_item(self):
+        items = self.Log.selectedItems()
+        for item in items:
+            self.ftp.exclude(item.getText())
+
         return
-        #DELETE DIRECTORY
 
     def create_remote_item(self):
         return
@@ -147,8 +150,13 @@ class Ui(QtWidgets.QMainWindow):
         #DOWNLOAD FILE
 
     def upload_item(self):
-        return
-        #UPLOAD FILE
+        if not self.connected:
+            QMessageBox.information(self, "RASP", "Connect to server before uploading.")
+            return
+
+        items = self.Log.selectedItems()
+        for item in items:
+            self.ftp.upload(item.getText())
 
 if __name__ == '__main__':
     app = QtWidgets.QApplication(sys.argv)
