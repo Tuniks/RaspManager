@@ -2,6 +2,7 @@ import sys
 from PyQt5 import uic, QtWidgets, QtGui
 from PyQt5.QtCore import Qt, QDirIterator, QDir, QFileInfo, QUrl
 from PyQt5.QtWidgets import QMessageBox, QInputDialog
+from FtpClass import FtpConnection
 
 
 class Ui(QtWidgets.QMainWindow):
@@ -15,7 +16,12 @@ class Ui(QtWidgets.QMainWindow):
         self.stackedWidget.setCurrentIndex(0)
         self.Log.setSelectionMode(QtWidgets.QAbstractItemView.ExtendedSelection)
 
+        self.ftp = FtpConnection()
+
         self.Path.setText(self.currentDir.absolutePath())
+        self.passInput.setText("lookatme")
+        self.userInput.setText("meeseeks")
+        self.serverInput.setText("vbustamante.xyz")
         self.on_execute_clicked()
         self.show()
 
@@ -26,6 +32,7 @@ class Ui(QtWidgets.QMainWindow):
         it = QDirIterator(self.currentDir, QDirIterator.NoIteratorFlags)
         while it.hasNext():
             self.Log.addItem(it.next())
+        self.Path.setText(self.currentDir.absolutePath())
 
     def on_path_change(self):
         self.currentDir.cd(self.Path.text())
@@ -74,7 +81,6 @@ class Ui(QtWidgets.QMainWindow):
             QtGui.QDesktopServices.openUrl(QUrl.fromLocalFile(item.text()))
 
     def on_workspace_item_double_clicked(self, item):
-
         if item.text() == "Local":
             self.stackedWidget.setCurrentIndex(0)
         elif item.text() == "Server" and self.connected:
@@ -87,23 +93,40 @@ class Ui(QtWidgets.QMainWindow):
         user = self.userInput.text()
         pwd = self.passInput.text()
 
-        print(user+":"+pwd+"@"+url)
+        try:
+            self.ftp.connect(url)
+            self.ftp.login(user, pwd)
+        except:
+            QMessageBox.information(self, "RASP", "Error connecting to server.")
+            self.stackedWidget.setCurrentIndex(0)
+            return
 
         self.connected = True
         self.stackedWidget.setCurrentIndex(1)
+        self.load_remote_log()
 
     def on_disconnect_clicked(self):
-        self.connect = False
-        #CLOSE FTP
+        self.ftp.close()
+        self.connected = False
         self.stackedWidget.setCurrentIndex(2)
 
-    def on_remote_back_double_clicked(self):
-        #ADD CD UP
+    def load_remote_log(self):
+        self.Path_2.setText(self.ftp.pwd())
+        self.Log_2.clear()
+        self.ftp.ls()
+        for item in self.ftp.objList:
+            self.Log_2.addItem(item['name'])
+
+    def on_remote_back_clicked(self):
+        self.ftp.cd("..")
+        self.load_remote_log()
 
     def on_remote_item_double_clicked(self, item):
-        #ADD CD PARA item.text()
+        self.ftp.cd(item.text())
+        self.load_remote_log()
+        return
 
-    def show_remote_context_menu()
+    def show_remote_context_menu(self, click):
         globalpos = self.Log.mapToGlobal(click)
         menu = QtWidgets.QMenu()
         menu.addAction("Delete", lambda: self.erase_remote_item())
@@ -111,16 +134,20 @@ class Ui(QtWidgets.QMainWindow):
         menu.addAction("Download", lambda: self.download_remote_item())
         menu.exec(globalpos)
 
-    def erase_remote_item():
+    def erase_remote_item(self):
+        return
         #DELETE DIRECTORY
 
-    def create_remote_item():
+    def create_remote_item(self):
+        return
         #CREATE DIRECTORY
 
-    def download_remote_item():
+    def download_remote_item(self):
+        return
         #DOWNLOAD FILE
 
-    def upload_item():
+    def upload_item(self):
+        return
         #UPLOAD FILE
 
 if __name__ == '__main__':

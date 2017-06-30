@@ -44,7 +44,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>1</number>
     </property>
     <widget class="QWidget" name="page">
      <property name="enabled">
@@ -262,7 +262,7 @@
      <x>0</x>
      <y>0</y>
      <width>1000</width>
-     <height>21</height>
+     <height>22</height>
     </rect>
    </property>
   </widget>
@@ -411,7 +411,7 @@
    <sender>Back_2</sender>
    <signal>clicked()</signal>
    <receiver>MainWindow</receiver>
-   <slot>on_remote_back_double_clicked()</slot>
+   <slot>on_remote_back_clicked()</slot>
    <hints>
     <hint type="sourcelabel">
      <x>452</x>
@@ -439,6 +439,38 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>workspaceList</sender>
+   <signal>itemDoubleClicked(QListWidgetItem*)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>on_workspace_item_double_clicked(QListWidgetItem*)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>177</x>
+     <y>335</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>499</x>
+     <y>318</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>Execute_2</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>load_remote_log()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>909</x>
+     <y>74</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>499</x>
+     <y>318</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>on_execute_clicked()</slot>
@@ -450,7 +482,8 @@
   <slot>on_connect_clicked()</slot>
   <slot>on_disconnect_clicked()</slot>
   <slot>on_remote_item_double_clicked(QListWidgetItem*)</slot>
-  <slot>on_remote_back_double_clicked()</slot>
+  <slot>on_remote_back_clicked()</slot>
   <slot>show_remote_context_menu()</slot>
+  <slot>load_remote_log()</slot>
  </slots>
 </ui>

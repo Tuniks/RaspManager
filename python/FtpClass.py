@@ -6,28 +6,26 @@ class FtpConnection(FTP):
 
     def __init__(self):
         super().__init__()
-        self.types = []
-        self.names = []
+        self.objList = []
 
-    def get_types(self, dir):
-        i = 0
-        self.cwd(dir)
-        self.retrlines("LIST", self.types.append)
-        for x in self.types:
-            self.types[i] = x[0]
-            i += 1
-        return self.types
+    def ls(self):
+        self.objList = []
+        rawlist = []
+        self.retrlines("LIST", rawlist.append)
 
-    def get_file_names(self, dir):
-        self.cwd(dir)
-        self.retrlines("LIST", self.names.append)
-        for i in range(0, len(self.names)):
-            self.names[i] = self.names[i].rsplit(None, 1)[-1]
-        return self.names
+        for i, x in enumerate(rawlist):
+            isdir = x[0] == 'd'
+            objname = x.rsplit(None, 1)[-1]
+            self.objList.append({'name': objname, 'isDir': isdir})
 
-    def cd(self, dir):
+    def cd(self, dirName):
         try:
-            self.cwd(dir)
+            # for obj in self.objList:
+            #     if obj['name'] == dirName and obj['isDir']:
+            #         return
+
+            self.cwd(dirName)
+            self.ls()
         except ftplib.error_perm:
             return
 
