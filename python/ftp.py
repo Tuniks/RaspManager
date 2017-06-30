@@ -1,26 +1,17 @@
 from FtpClass import FtpConnection
+from multiprocessing.pool import ThreadPool
 
 
-ftp = FtpConnection()
-ftp.connect("iuricostermani.tk")
-ftp.login("meeseeks","lookatme")
-#ftp.cwd("/home/admin")
+def upload(file):
+    ftp = FtpConnection()
+    ftp.connect("iuricostermani.tk")
+    ftp.login("meeseeks","lookatme")
+    f = open(file,'rb')
+    ftp.storbinary('STOR %s' %file, f)
+    f.close()
+    ftp.quit()
 
-#ftp.upload("test")
+files = ["test","test1","test2","test3","test4"]
 
-ftp.exclude("test")
-ftp.get_file_names(ftp.pwd())
-for x in ftp.names:
-    print(x)
-
-ftp.close()
-#file = open(filename, 'wb')
-
-#ftp.retrbinary('RETR %s' % filename, file.write)
-#file.close()
-#files = []
-
-#files = ftp.nlst()
-
-#for f in files:
-#    print(f)
+pool = ThreadPool(3)
+pool.map(upload, files)
